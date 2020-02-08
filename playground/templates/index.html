@@ -5,5 +5,18 @@
   </head>
   <body>
     <h1>Welcome to Mason's website!</h1>
+    <p>This is just a really quick thing I made with Django</p>
+    <form method="POST" action="{% url 'homepage' %}">
+      {% csrf_token %}
+      Type in python code here:
+      <br />
+      <textarea name="code" rows="7" cols="30">{{ textbox }}</textarea>
+      <br />
+      <input type="submit" value="Run code!">
+    </form>
+    {% if output %}
+    <h2>Output</h2>
+    <p>{{ output }}</p>
+    {% endif %}
   </body>
 </html>

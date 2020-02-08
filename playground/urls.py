@@ -18,6 +18,6 @@ from django.urls import path
 from playground import views
 
 urlpatterns = [
-    path('', views.index),
+    path('', views.index, name="homepage"),
     path('admin/', admin.site.urls),
 ]
