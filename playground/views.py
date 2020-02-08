@@ -21,9 +21,9 @@ def index(request):
             with stdoutIO() as output:
                 exec(code)
             return render(request, 'index.html', {'output':output.getvalue(), 'textbox':request.POST['code']})
-        except BaseException as e:
-            print(e)
-            return render(request, 'index.html', {'output':e, 'textbox':request.POST['code']})
+        except BaseException as error:
+            print(error)
+            return render(request, 'index.html', {'output':error, 'textbox':request.POST['code']})
 
     else:
         return render(request, 'index.html', {'textbox':'print(\"hello, world!\")'})
