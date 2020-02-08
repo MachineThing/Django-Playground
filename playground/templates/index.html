@@ -5,13 +5,13 @@
   </head>
   <body>
     <h1>Welcome to Mason's website!</h1>
-    <p>This is just a really quick thing I made with Django</p>
+    <p>This is just a really quick thing I made with Django, basically this thing allows you to run Python code in the browser.</p>
     <form method="POST" action="{% url 'homepage' %}">
       {% csrf_token %}
       Type in python code here:
       <br />
       <textarea name="code" rows="7" cols="30">{{ textbox }}</textarea>
-      <br />
+      <br /><br />
       <input type="submit" value="Run code!">
     </form>
     {% if output %}
