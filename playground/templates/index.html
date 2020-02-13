@@ -1,28 +1,18 @@
-{% load static %}
-<!DOCTYPE html>
-<html>
-  <head>
-    <link rel="stylesheet" href="{% static 'style.css' %}" >
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="{% static 'indent.js' %}" charset="utf-8"></script>
-    <title>Cool stuff</title>
-  </head>
-  <body>
-    <div class='box'>
-      <h1>Welcome to Mason's website!</h1>
-      <p>This is just a really quick thing I made with Django, basically this thing allows you to run Python code in the browser.</p>
-      <form method="POST" action="{% url 'homepage' %}">
-        {% csrf_token %}
-        Type in python code here:
-        <br />
-        <textarea name="code" rows="20" cols="60" id="textbox" >{{ textbox }}</textarea>
-        <br /><br />
-        <input type="submit" value="Run code!">
-      </form>
-      {% if output %}
-      <h2>Output</h2>
-      <p>{{ output }}</p>
-      {% endif %}
-    </div>
-  </body>
-</html>
+{% extends 'base.html' %}
+{% block head %}{% endblock %}
+{% block body %}
+<h1>Welcome to Mason's website!</h1>
+<p>This is just a really quick thing I made with Django, basically this thing allows you to run Python code in the browser.</p>
+<form method="POST" action="{% url 'homepage' %}">
+  {% csrf_token %}
+  Type in python code here:
+  <br />
+  <textarea name="code" rows="20" cols="60" id="textbox" >{{ textbox }}</textarea>
+  <br /><br />
+  <input type="submit" value="Run code!">
+</form>
+{% if output %}
+<h2>Output</h2>
+<p>{{ output }}</p>
+{% endif %}
+{% endblock %}
