@@ -12,21 +12,21 @@ def stdoutIO():
     sys.stdout = old
 
 def index(request):
-    if request.method == 'POST':
+    if request.method == 'POST': # If the user sent a 'POST' HTTP request
+        codehead = """def input(*args, **kwargs):
+            raise Exception(\"Input function is not allowed!\")
+        """
+        code = codehead+'\n'+request.POST['code']
         try:
-            codehead = """def input(*args, **kwargs):
-                raise Exception(\"Input function is not allowed!\")
-            """
-            code = codehead+'\n'+request.POST['code']
             with stdoutIO() as output:
                 exec(code)
-            if output.getvalue() == '':
-                return prender(request, 'pyexec.html', {'output':'No output', 'textbox':request.POST['code']})
-            else:
-                return prender(request, 'pyexec.html', {'output':output.getvalue(), 'textbox':request.POST['code']})
-        except BaseException as error:
+                execval = output.getvalue()
+        except BaseException as error: # If there was an error during execution
             print(error)
-            return prender(request, 'pyexec.html', {'output':error, 'textbox':request.POST['code']})
-
-    else:
+            execval = error
+        if execval == '': # If there was no output in the program
+            return prender(request, 'pyexec.html', {'output':'No output', 'textbox':request.POST['code']})
+        else: # If there was a output in the program
+            return prender(request, 'pyexec.html', {'output':output.getvalue(), 'textbox':request.POST['code']})
+    else: # If the user sent a 'GET' HTTP request
         return prender(request, 'pyexec.html', {'textbox':'print(\"hello, world!\")'})
