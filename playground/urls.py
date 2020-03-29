@@ -18,6 +18,8 @@ from django.urls import path
 from playground import views
 
 urlpatterns = [
-    path('', views.index, name="homepage"),
+    path('', views.homepage, name="homepage"),
+    path('redirect/', views.homepage, name="redirect"),
+    path('python_compiler/', views.python_compiler, name="python_compiler"),
     path('admin/', admin.site.urls),
 ]

@@ -11,7 +11,10 @@ def stdoutIO():
     yield stdout
     sys.stdout = old
 
-def index(request):
+def homepage(request):
+    return prender(request, 'welcome.html')
+
+def python_compiler(request):
     if request.method == 'POST': # If the user sent a 'POST' HTTP request
         codehead = """def input(*args, **kwargs):
             raise Exception(\"Input function is not allowed!\")
