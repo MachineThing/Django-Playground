@@ -1,3 +1,4 @@
+from django.http import HttpResponseRedirect
 from internals import prender
 import sys, contextlib, io
 
@@ -12,6 +13,12 @@ def stdoutIO():
     sys.stdout = old
 
 def homepage(request):
+    if request.method == 'POST':
+        return HttpResponseRedirect(request.POST['app'])
+    else:
+        return prender(request, 'welcome.html')
+
+def ajax_test(request):
     return prender(request, 'welcome.html')
 
 def python_compiler(request):

@@ -14,9 +14,10 @@
     <div class='sbox'>
       <form method="POST" action="{% url 'homepage' %}">
         {% csrf_token %}
-        <select id="app">
+        <select id="app", name="app">
+          <option value="">Index page</option>
           <option value="python_compiler">Python Compiler</option>
-          <option value="python_compiler">AJAX Testing</option>
+          <option value="ajax_test">AJAX Testing</option>
         </select>
         <input type="submit" value="Go to">
       </form>
