@@ -1,6 +1,6 @@
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from internals import prender
-import sys, contextlib, io
+import sys, contextlib, io, random
 
 # Thanks Jochen Ritzel on StackOverflow for this beautiful function below
 
@@ -20,6 +20,16 @@ def homepage(request):
 
 def ajax_test(request):
     return prender(request, 'ajax.html')
+
+def ajax_text(request):
+    facts = [
+    'the Python programming language name comes from the British comedy series “Monty Python’s Flying Circus”?',
+    'the first high-level programming language is nammed Plankalkül.',
+    'AJAX is used in many websites!',
+    'the origin of a \"Hello World!\" program is from the 1978 book \"The C Programming Language\", the program just prints \"Hello world\".'
+    ]
+    list_ind = random.randint(0, len(facts)-1)
+    return HttpResponse(str(list_ind)+'__That '+facts[list_ind])
 
 def python_compiler(request):
     if request.method == 'POST': # If the user sent a 'POST' HTTP request

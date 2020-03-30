@@ -15,7 +15,8 @@ function getFact() {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4) {
-     document.getElementById("funFact").innerHTML = this.responseText;
+      var sptxt = this.responseText.split("__")
+      document.getElementById("funFact").innerHTML = sptxt;
     }
   };
   xhttp.open("GET", "/ajax/retxt", true);

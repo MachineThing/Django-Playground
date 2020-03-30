@@ -21,5 +21,6 @@ urlpatterns = [
     path('', views.homepage, name="homepage"),
     path('python_compiler/', views.python_compiler, name="python_compiler"),
     path('ajax_test/', views.ajax_test, name="ajax_test"),
+    path('ajax/retxt/', views.ajax_text, name="__retxt"),
     #path('admin/', admin.site.urls),
 ]
