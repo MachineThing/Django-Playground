@@ -10,15 +10,16 @@
     }
   });
 };*/
-
+var oldfactindex = null
 function getFact() {
   var xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function() {
-    if (this.readyState == 4) {
-      var sptxt = this.responseText.split("__")
-      document.getElementById("funFact").innerHTML = sptxt;
-    }
+  var data = new FormData();
+  xhttp.onload = function() {
+    var sptxt = this.responseText.split("__")
+    oldfactindex = sptxt[0]
+    document.getElementById("funFact").innerHTML = sptxt[1];
   };
-  xhttp.open("GET", "/ajax/retxt", true);
-  xhttp.send();
+  xhttp.open("POST", "/ajax/retxt/", true);
+  data.append('index', oldfactindex);
+  xhttp.send(data);
 }

@@ -1,4 +1,5 @@
 from django.http import HttpResponseRedirect, HttpResponse
+from django.views.decorators.csrf import csrf_exempt
 from internals import prender
 import sys, contextlib, io, random
 
@@ -21,15 +22,22 @@ def homepage(request):
 def ajax_test(request):
     return prender(request, 'ajax.html')
 
+@csrf_exempt
 def ajax_text(request):
-    facts = [
-    'the Python programming language name comes from the British comedy series “Monty Python’s Flying Circus”?',
-    'the first high-level programming language is nammed Plankalkül.',
-    'AJAX is used in many websites!',
-    'the origin of a \"Hello World!\" program is from the 1978 book \"The C Programming Language\", the program just prints \"Hello world\".'
-    ]
-    list_ind = random.randint(0, len(facts)-1)
-    return HttpResponse(str(list_ind)+'__That '+facts[list_ind])
+    if request.method == 'POST':
+        facts = [
+            'That the Python programming language name comes from the British comedy series “Monty Python’s Flying Circus”?',
+            'The first high-level programming language is named Plankalkül.',
+            'AJAX is used in many websites!',
+            'The origin of a \"Hello World!\" program is from the 1978 book \"The C Programming Language\", the program just prints \"Hello world\".'
+        ]
+        list_ind = random.randint(0, len(facts)-1)
+        if request.POST['index'] != 'null':
+            while list_ind == int(request.POST['index']):
+                list_ind = random.randint(0, len(facts)-1)
+        return HttpResponse(str(list_ind)+'__'+facts[list_ind])
+    else:
+        return HttpResponse('<h1>403 - Forbidden</h1>')
 
 def python_compiler(request):
     if request.method == 'POST': # If the user sent a 'POST' HTTP request
