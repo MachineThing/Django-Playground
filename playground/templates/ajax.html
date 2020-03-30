@@ -1,7 +1,14 @@
 {% extends 'base.html' %}
-{% block head %}{% endblock %}
+{% load static %}
+{% block head %}
+<script src="{% static 'ajax.js' %}" charset="utf-8"></script>
+{% endblock %}
 {% block body %}
 <h1>Ajax</h1>
 <p>Testing out AJAX (Asynchronous JavaScript And XML)!</p>
-
+<br />
+<h1>Did you know?</h1>
+<p id=funFact>Press the "Get fun fact" button for a fun fact!</p>
+<br />
+<button type="button" onclick="getFact()">Get fun fact</button>
 {% endblock %}
