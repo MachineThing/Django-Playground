@@ -21,5 +21,5 @@ urlpatterns = [
     path('', views.homepage, name="homepage"),
     path('python_compiler/', views.python_compiler, name="python_compiler"),
     path('ajax_test/', views.ajax_test, name="ajax_test"),
-    path('admin/', admin.site.urls),
+    #path('admin/', admin.site.urls),
 ]

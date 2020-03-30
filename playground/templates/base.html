@@ -15,9 +15,9 @@
       <form method="POST" action="{% url 'homepage' %}">
         {% csrf_token %}
         <select id="app", name="app">
-          <option value="">Index page</option>
-          <option value="python_compiler">Python Compiler</option>
-          <option value="ajax_test">AJAX Testing</option>
+          {% for url in urls %}
+            <option value="{{ url.pattern }}">{{ url.name }}</option>
+          {% endfor %}
         </select>
         <input type="submit" value="Go to">
       </form>

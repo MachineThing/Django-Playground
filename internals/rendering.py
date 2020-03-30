@@ -1,10 +1,15 @@
 from django.http import HttpResponse
 from django.template import loader
 from bs4 import BeautifulSoup as bs4
+from playground import urls
 
 # Basically the render function but prettifies the html file
 # Because the programmer has severe OCD when it comes to indents.
-def prender(request, template_name, context=None, content_type='text/html', status=200, using=None):
+def prender(request, template_name, context={}, content_type='text/html', status=200, using=None):
+    context['urls'] = []
+    for url in urls.urlpatterns:
+        context['urls'].append({'name':url.name, 'pattern':url.pattern})
+        print({'name':url.name, 'pattern':url.pattern})
     content = loader.render_to_string(template_name, context, request, using) # Get HTML code from file
     no_new_line = content.split('\n')
     no_new_list = ''
