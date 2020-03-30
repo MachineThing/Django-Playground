@@ -9,7 +9,6 @@ def prender(request, template_name, context={}, content_type='text/html', status
     context['urls'] = []
     for url in urls.urlpatterns:
         context['urls'].append({'name':url.name.replace("_", " ").title(), 'pattern':url.pattern})
-        print({'name':url.name, 'pattern':url.pattern})
     content = loader.render_to_string(template_name, context, request, using) # Get HTML code from file
     no_new_line = content.split('\n')
     no_new_list = ''
