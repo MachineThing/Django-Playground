@@ -19,7 +19,7 @@ def homepage(request):
         return prender(request, 'welcome.html')
 
 def ajax_test(request):
-    return prender(request, 'welcome.html')
+    return prender(request, 'ajax.html')
 
 def python_compiler(request):
     if request.method == 'POST': # If the user sent a 'POST' HTTP request

@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block head %}{% endblock %}
 {% block body %}
-<h1>Welcome to Mason's website!</h1>
+<h1>Python Compiler</h1>
 <p>This is just a really quick thing I made with Django, basically this thing allows you to run Python code in the browser.</p>
 <form method="POST" action="{% url 'python_compiler' %}">
   {% csrf_token %}
