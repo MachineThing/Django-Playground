@@ -5,10 +5,12 @@ from playground import urls
 
 # Basically the render function but prettifies the html file
 # Because the programmer has severe OCD when it comes to indents.
+# Also append a few things (like the urls) into the context.
 def prender(request, template_name, context={}, content_type='text/html', status=200, using=None):
     context['urls'] = []
     for url in urls.urlpatterns:
-        context['urls'].append({'name':url.name.replace("_", " ").title(), 'pattern':url.pattern})
+        if url.name[:2] != '__':
+            context['urls'].append({'name':url.name.replace("_", " ").title(), 'pattern':url.pattern})
     content = loader.render_to_string(template_name, context, request, using) # Get HTML code from file
     no_new_line = content.split('\n')
     no_new_list = ''
